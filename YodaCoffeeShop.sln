@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.438
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YodaCoffeeShop", "MyCoffeeProject\YodaCoffeeShop.csproj", "{81220064-FFBD-45E2-8E43-5BC572187686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YodaCoffeeShopData", "YodaCoffeeShopData\YodaCoffeeShopData.csproj", "{4A4B7C47-35E3-41D7-A2D0-42E0571CD680}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81220064-FFBD-45E2-8E43-5BC572187686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81220064-FFBD-45E2-8E43-5BC572187686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81220064-FFBD-45E2-8E43-5BC572187686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81220064-FFBD-45E2-8E43-5BC572187686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A4B7C47-35E3-41D7-A2D0-42E0571CD680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A4B7C47-35E3-41D7-A2D0-42E0571CD680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A4B7C47-35E3-41D7-A2D0-42E0571CD680}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A4B7C47-35E3-41D7-A2D0-42E0571CD680}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59C257DB-5418-4233-B479-C4E5E4C76109}
+	EndGlobalSection
+EndGlobal
