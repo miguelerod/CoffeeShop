@@ -4,57 +4,66 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq;
 using MyCoffeeProject.Classes.Derived_Coffee_Drinks; //because in folder need to import additional folder
+using YodaCoffeeShopData;
 
 namespace MyCoffeeProject
 {
 
     public partial class YodaCoffeeShop : Form, IHello //need partial. WHY?
     {
-       // 'public List<Customer> YodaCustomerList = new List<Customer>;
+        // 'public List<Customer> YodaCustomerList = new List<Customer>;
 
-        ArrayList yodaCustomerList = new ArrayList();
-        ArrayList coffeesOrdered = new ArrayList();
+        public List<Client> CustomerList;
+        public List<Item> ProductList;
+        Order order;
+
         public YodaCoffeeShop()
         {
             InitializeComponent();
-
         }
+
+       
 
         private void saveCustBtn_Click(object sender, EventArgs e)
         {
-            //TODO
-            //look into why i cant use a variable 
-
-            //private string fName;
-            //private string lName;
-            //private string pNumber;
-            //private string fCoffee;
-
-            //private string fName = fNametextBox.Text;
-            //string fName = fNametextBox.Text;
-            //string fName = fNametextBox.Text;
-            //string fName = fNametextBox.Text;
-
-            var YodasCustomer = new Customer(fNametextBox.Text, lastNametextBox.Text, phoneNumtextBox.Text, favCoffeeTxtBox.Text );
-
-            //add customer to list
-            yodaCustomerList.Add(YodasCustomer);
             
-        }
+            //add customer to db
+            var clientName = nameTxtBox.Text;
+            var clientEmail = emailTxtBox.Text;
+            var clientPhNum = phoneNumtextBox.Text;
+            var newClient = new Client {Name = clientName, Email = clientEmail, PhoneNumber = clientPhNum};
 
-        private void displayCustBtn_Click(object sender, EventArgs e)
-        {
-            foreach (Customer cust in yodaCustomerList)
+            var emailExists = false;
+            foreach (var cust in CustomerList)
             {
-                outputListBox.Items.Add(cust.DisplayCustomer()); //add customer obj in string form
-                outPutLabel.Text = cust.DisplayCustomer();//display the customer object as string form
-            }           
+                if (cust.Email == newClient.Email)
+                {
+                    InvalidEmail.Visible = true;
+                    emailExists = true;
+                    break;
+                }
+            }
+
+
+            if (!emailExists)
+            {
+                InvalidEmail.Visible = false;
+
+                newClient.Insert();
+                
+                CustomerList = Client.GetByState(true);
+
+                PopulateClientListBox();
+
+                ClearAll();
+            }
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
@@ -62,18 +71,38 @@ namespace MyCoffeeProject
             ClearAll();
         }
 
+        private void PopulateClientListBox()
+        {
+            ClientListBox.Items.Clear();
+
+            foreach (var cust in CustomerList)
+            {
+                ClientListBox.Items.Add($"{cust.Name} | {cust.Email} | {cust.PhoneNumber}");
+            }
+
+            ClientListBox.Refresh();
+        }
+
+        private void PopulateProductListBox()
+        {
+            ClientListBox.Items.Clear();
+
+            foreach (var item in ProductList)
+            {
+                ProductListBox.Items.Add($"{item.Name} | {item.Description} | {item.Price}");
+            }
+
+            ProductListBox.Refresh();
+        }
+
         #region Clear All Method
         private void ClearAll()
         {
-            fNametextBox.Text = "";
-            lastNametextBox.Text = "";
+            nameTxtBox.Text = "";
             phoneNumtextBox.Text = "";
-            favCoffeeTxtBox.Text = "";
+            emailTxtBox.Text = "";
 
-            outPutLabel.Text = string.Empty;
             //clear the list box
-            outputListBox.Items.Clear();
-
             priceLabel.Text = "Price:";
 
             smRadioBtn.Checked = false;
@@ -118,9 +147,9 @@ namespace MyCoffeeProject
                 //Set Price
                 priceLabel.Text = "Price: " + custsCoffee.Price.ToString("C2");
                 //Add object to list
-                coffeesOrdered.Add(custsCoffee);
+                //order.Add(custsCoffee);
                 //Count total
-                ttlCoffeesLabel.Text = "Total:" + coffeesOrdered.Capacity.ToString();
+                //ttlCoffeesLabel.Text = "Total:" + order.Capacity.ToString();
             }
             else if (icedLatteRdBtn.Checked == true)
             {
@@ -148,22 +177,16 @@ namespace MyCoffeeProject
                 priceLabel.Text = "Price: " + custsCoffee.Price.ToString("C2");
 
                 //Add object to list
-                coffeesOrdered.Add(custsCoffee); //TODO wrong
+                //order.Add(custsCoffee); //TODO wrong
                 //Count total
-                ttlCoffeesLabel.Text = "Total:" + coffeesOrdered.Capacity.ToString();
+                //ttlCoffeesLabel.Text = "Total:" + order.Capacity.ToString();
             }
 
            // CoffeeDrinks customersCoffee = new CoffeeDrinks();     
         }
         #endregion
 
-        //private void tShirtBtn_Click(object sender, EventArgs e)
-        //{
-        ////    var form = new TShirtForm();
-        ////    form.Show();  //show t-shirt form
-        ////}
-
-        //need to define and use the hello () because I impllement the interface at top of the program
+        //need to define and use the hello () because I implement the interface at top of the program
         public void Hello()
         {
             Console.WriteLine("Yoda says Hello");
@@ -177,6 +200,86 @@ namespace MyCoffeeProject
         private void YodaCoffeeShop_Load(object sender, EventArgs e)
         {
             Hello();
+            PopulateClientListBox();
+        }
+
+        private void lblCustomerHeader_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SearchBar_TextChanged(object sender, EventArgs e)
+        {
+            if (CustomersSearchBar.Text != "")
+            {
+                CustomerList = Client.SearchByName(CustomersSearchBar.Text);
+                PopulateClientListBox();
+            }
+            else
+            {
+                CustomerList = Client.GetByState(true);
+                PopulateClientListBox();
+            }
+           
+        }
+
+        private void outputListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var index = ClientListBox.SelectedIndex;
+
+            if (index == (ClientListBox.Items.Count - 1))
+            {
+                
+            }
+        }
+
+        private void enterFNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            var index = ClientListBox.SelectedIndex;
+            var customer = CustomerList[index];
+            
+            customer.Remove();
+
+            PopulateClientListBox();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductSearchBar_TextChanged(object sender, EventArgs e)
+        {
+            if (ProductSearchBar.Text != "")
+            {
+                CustomerList = Client.SearchByName(ProductSearchBar.Text);
+                PopulateClientListBox();
+            }
+            else
+            {
+                CustomerList = Client.GetByState(true);
+                PopulateClientListBox();
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

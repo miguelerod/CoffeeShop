@@ -1,23 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.Sql;
-using System.Data.OleDb;
-using System.Data.SqlClient;
 using YodaCoffeeShopData;
 
-namespace MyCoffeeProject.Classes
+namespace MyCoffeeProject
 {
     public partial class LoginForm : Form
     {
-        public static User user;
-
         public LoginForm()
         {
             InitializeComponent();
@@ -31,6 +20,23 @@ namespace MyCoffeeProject.Classes
         private void UserBox_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+
+        private void UserBox_inputKey(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                SelectNextControl(this, true, false, false, true);
+            }
+        }
+
+        private void PasswordBox_inputKey(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                signInButton_Click(this, new EventArgs());
+            }
         }
 
         private void PasswordBox_TextChanged(object sender, EventArgs e)
@@ -48,17 +54,34 @@ namespace MyCoffeeProject.Classes
             string userName = UserBox.Text;
             string password = PasswordBox.Text;
 
-            using (var Context = new YodaCoffeeShopContext())
+            using (var context = new YodaCoffeeShopContext())
             {
-                var user = Context.Users.
-                                    Where(u => u.UserName == userName);
+                var user = context.Users.FirstOrDefault(u => u.UserName == userName);
+                if (user == null)
+                {
+                    wrongCredentials.Visible = true;
+                }
+                else
+                {
+                    if (PasswordHasher.ValidatePassword(password, user.Password))
+                    {
+                        Program.LoggedUser = user;
+                        Program.LoginSuccess = true;
+                        Close();
+                    }
+                    else
+                    {
+                        wrongCredentials.Visible = true;
+                    }
+                }
             }
+
+            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Close();
         }
-        
     }
 }

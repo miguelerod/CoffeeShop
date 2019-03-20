@@ -71,11 +71,9 @@
   <ItemGroup>
     <Compile Include="Classes\Coffee.cs" />
     <Compile Include="Classes\CoffeeDrinks.cs" />
-    <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\Derived Coffee Drinks\IcedCoffee.cs" />
     <Compile Include="Classes\Derived Coffee Drinks\IcedLatte.cs" />
-    <Compile Include="Classes\Interface1.cs" />
-    <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\IDbService.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +81,7 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\IHello.cs" />
+    <Compile Include="PasswordHasher.cs" />
     <Compile Include="YodaCoffeeShop.cs">
       <SubType>Form</SubType>
     </Compile>

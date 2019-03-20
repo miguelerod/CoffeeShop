@@ -1,4 +1,7 @@
-﻿namespace MyCoffeeProject.Classes
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace MyCoffeeProject
 {
     partial class LoginForm
     {
@@ -68,6 +71,7 @@
             this.UserBox.Size = new System.Drawing.Size(203, 20);
             this.UserBox.TabIndex = 2;
             this.UserBox.TextChanged += new System.EventHandler(this.UserBox_TextChanged);
+            this.UserBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserBox_inputKey);
             // 
             // PasswordBox
             // 
@@ -77,7 +81,7 @@
             this.PasswordBox.Size = new System.Drawing.Size(203, 20);
             this.PasswordBox.TabIndex = 3;
             this.PasswordBox.UseSystemPasswordChar = true;
-            this.PasswordBox.TextChanged += new System.EventHandler(this.PasswordBox_TextChanged);
+            this.PasswordBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordBox_inputKey);
             // 
             // userNameLabel
             // 
@@ -102,7 +106,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::MyCoffeeProject.Properties.Resources.login1;
-            this.pictureBox1.Location = new System.Drawing.Point(34, 25);
+            this.pictureBox1.Location = new System.Drawing.Point(21, 50);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(218, 159);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -127,6 +131,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GrayText;
             this.ClientSize = new System.Drawing.Size(546, 243);
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.Controls.Add(this.wrongCredentials);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.passwordLabel);
@@ -136,6 +141,7 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.signInButton);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "LoginForm";
             this.Text = "Sign In";
             this.Load += new System.EventHandler(this.loginForm_Load);
