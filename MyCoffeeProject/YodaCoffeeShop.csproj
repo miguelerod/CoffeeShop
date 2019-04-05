@@ -69,11 +69,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Coffee.cs" />
-    <Compile Include="Classes\CoffeeDrinks.cs" />
-    <Compile Include="Classes\Derived Coffee Drinks\IcedCoffee.cs" />
-    <Compile Include="Classes\Derived Coffee Drinks\IcedLatte.cs" />
-    <Compile Include="Classes\IDbService.cs" />
+    <Compile Include="ClientOrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientOrdersForm.Designer.cs">
+      <DependentUpon>ClientOrdersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditCustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCustomerForm.Designer.cs">
+      <DependentUpon>EditCustomerForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditProductForm.Designer.cs">
+      <DependentUpon>EditProductForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckOrderForm.Designer.cs">
+      <DependentUpon>CheckOrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,7 +101,12 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\IHello.cs" />
-    <Compile Include="PasswordHasher.cs" />
+    <Compile Include="NewItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewItemForm.Designer.cs">
+      <DependentUpon>NewItemForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="YodaCoffeeShop.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,8 +115,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CheckOrderForm.resx">
+      <DependentUpon>CheckOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientOrdersForm.resx">
+      <DependentUpon>ClientOrdersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCustomerForm.resx">
+      <DependentUpon>EditCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditProductForm.resx">
+      <DependentUpon>EditProductForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewItemForm.resx">
+      <DependentUpon>NewItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="YodaCoffeeShop.resx">
       <DependentUpon>YodaCoffeeShop.cs</DependentUpon>

@@ -1,4 +1,7 @@
-﻿namespace MyCoffeeProject
+﻿using System;
+using System.Windows.Forms;
+
+namespace MyCoffeeProject
 {
     partial class YodaCoffeeShop
     {
@@ -41,15 +44,12 @@
             this.emailTxtBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCustomerHeader = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.CustomersSearchBar = new System.Windows.Forms.TextBox();
-            this.phoneNumtextBox = new System.Windows.Forms.MaskedTextBox();
+            this.PhNumTextBox = new System.Windows.Forms.MaskedTextBox();
             this.DeleteCustButton = new System.Windows.Forms.Button();
             this.InvalidEmail = new System.Windows.Forms.Label();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.ShowOrdersButton = new System.Windows.Forms.Button();
-            this.AddProductButton = new System.Windows.Forms.Button();
+            this.AddToOrderButton = new System.Windows.Forms.Button();
             this.DeleteProductButton = new System.Windows.Forms.Button();
             this.ProductSearchBar = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,9 +62,20 @@
             this.SubTotalBox = new System.Windows.Forms.TextBox();
             this.TotalBox = new System.Windows.Forms.TextBox();
             this.ITBISBox = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.CheckoutButton = new System.Windows.Forms.Button();
+            this.EditCustButton = new System.Windows.Forms.Button();
+            this.EditProductButton = new System.Windows.Forms.Button();
             this.NewProductButton = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.TipBox = new System.Windows.Forms.TextBox();
+            this.TipLabel = new System.Windows.Forms.Label();
+            this.CustTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.CustomerTypeLabel = new System.Windows.Forms.Label();
+            this.RNCTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.RNCLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -83,17 +94,16 @@
             // enterFNameLabel
             // 
             this.enterFNameLabel.AutoSize = true;
-            this.enterFNameLabel.Location = new System.Drawing.Point(296, 111);
+            this.enterFNameLabel.Location = new System.Drawing.Point(296, 60);
             this.enterFNameLabel.Name = "enterFNameLabel";
             this.enterFNameLabel.Size = new System.Drawing.Size(134, 13);
             this.enterFNameLabel.TabIndex = 1;
             this.enterFNameLabel.Text = "Please Enter Client\'s Name";
-            this.enterFNameLabel.Click += new System.EventHandler(this.enterFNameLabel_Click);
             // 
             // phoneNumlabel
             // 
             this.phoneNumlabel.AutoSize = true;
-            this.phoneNumlabel.Location = new System.Drawing.Point(296, 173);
+            this.phoneNumlabel.Location = new System.Drawing.Point(296, 116);
             this.phoneNumlabel.Name = "phoneNumlabel";
             this.phoneNumlabel.Size = new System.Drawing.Size(81, 13);
             this.phoneNumlabel.TabIndex = 3;
@@ -101,7 +111,7 @@
             // 
             // nameTxtBox
             // 
-            this.nameTxtBox.Location = new System.Drawing.Point(444, 108);
+            this.nameTxtBox.Location = new System.Drawing.Point(444, 57);
             this.nameTxtBox.Name = "nameTxtBox";
             this.nameTxtBox.Size = new System.Drawing.Size(100, 20);
             this.nameTxtBox.TabIndex = 1;
@@ -113,7 +123,6 @@
             this.ClientListBox.Name = "ClientListBox";
             this.ClientListBox.Size = new System.Drawing.Size(282, 238);
             this.ClientListBox.TabIndex = 9;
-            this.ClientListBox.SelectedIndexChanged += new System.EventHandler(this.outputListBox_SelectedIndexChanged);
             // 
             // outPutLabel
             // 
@@ -145,7 +154,7 @@
             // 
             // emailTxtBox
             // 
-            this.emailTxtBox.Location = new System.Drawing.Point(444, 139);
+            this.emailTxtBox.Location = new System.Drawing.Point(444, 83);
             this.emailTxtBox.Name = "emailTxtBox";
             this.emailTxtBox.Size = new System.Drawing.Size(100, 20);
             this.emailTxtBox.TabIndex = 3;
@@ -153,7 +162,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(296, 144);
+            this.label1.Location = new System.Drawing.Point(299, 88);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 14;
@@ -168,7 +177,216 @@
             this.lblCustomerHeader.Size = new System.Drawing.Size(89, 17);
             this.lblCustomerHeader.TabIndex = 25;
             this.lblCustomerHeader.Text = "Customers:";
-            this.lblCustomerHeader.Click += new System.EventHandler(this.lblCustomerHeader_Click);
+            // 
+            // CustomersSearchBar
+            // 
+            this.CustomersSearchBar.Location = new System.Drawing.Point(5, 265);
+            this.CustomersSearchBar.Name = "CustomersSearchBar";
+            this.CustomersSearchBar.Size = new System.Drawing.Size(282, 20);
+            this.CustomersSearchBar.TabIndex = 27;
+            this.CustomersSearchBar.Text = "Enter Customer\'s Name Here";
+            this.CustomersSearchBar.Click += new System.EventHandler(this.EmptyTextBoxOnClick_Click);
+            this.CustomersSearchBar.TextChanged += new System.EventHandler(this.CustomerSearchBar_TextChanged);
+            // 
+            // PhNumTextBox
+            // 
+            this.PhNumTextBox.Location = new System.Drawing.Point(444, 113);
+            this.PhNumTextBox.Mask = "000-000-0000";
+            this.PhNumTextBox.Name = "PhNumTextBox";
+            this.PhNumTextBox.Size = new System.Drawing.Size(100, 20);
+            this.PhNumTextBox.TabIndex = 28;
+            // 
+            // DeleteCustButton
+            // 
+            this.DeleteCustButton.Location = new System.Drawing.Point(294, 349);
+            this.DeleteCustButton.Name = "DeleteCustButton";
+            this.DeleteCustButton.Size = new System.Drawing.Size(75, 23);
+            this.DeleteCustButton.TabIndex = 29;
+            this.DeleteCustButton.Text = "Delete";
+            this.DeleteCustButton.UseVisualStyleBackColor = true;
+            this.DeleteCustButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // InvalidEmail
+            // 
+            this.InvalidEmail.AutoSize = true;
+            this.InvalidEmail.ForeColor = System.Drawing.Color.Red;
+            this.InvalidEmail.Location = new System.Drawing.Point(550, 88);
+            this.InvalidEmail.Name = "InvalidEmail";
+            this.InvalidEmail.Size = new System.Drawing.Size(104, 13);
+            this.InvalidEmail.TabIndex = 30;
+            this.InvalidEmail.Text = "*Email Already Exists";
+            this.InvalidEmail.Visible = false;
+            // 
+            // ShowOrdersButton
+            // 
+            this.ShowOrdersButton.Location = new System.Drawing.Point(294, 293);
+            this.ShowOrdersButton.Name = "ShowOrdersButton";
+            this.ShowOrdersButton.Size = new System.Drawing.Size(75, 23);
+            this.ShowOrdersButton.TabIndex = 31;
+            this.ShowOrdersButton.Text = "Orders";
+            this.ShowOrdersButton.UseVisualStyleBackColor = true;
+            this.ShowOrdersButton.Click += new System.EventHandler(this.ShowOrdersButton_Click);
+            // 
+            // AddToOrderButton
+            // 
+            this.AddToOrderButton.Location = new System.Drawing.Point(677, 293);
+            this.AddToOrderButton.Name = "AddToOrderButton";
+            this.AddToOrderButton.Size = new System.Drawing.Size(85, 23);
+            this.AddToOrderButton.TabIndex = 36;
+            this.AddToOrderButton.Text = "Add To Order";
+            this.AddToOrderButton.UseVisualStyleBackColor = true;
+            this.AddToOrderButton.Click += new System.EventHandler(this.AddToOrderButton_Click);
+            // 
+            // DeleteProductButton
+            // 
+            this.DeleteProductButton.Location = new System.Drawing.Point(677, 376);
+            this.DeleteProductButton.Name = "DeleteProductButton";
+            this.DeleteProductButton.Size = new System.Drawing.Size(75, 23);
+            this.DeleteProductButton.TabIndex = 35;
+            this.DeleteProductButton.Text = "Delete";
+            this.DeleteProductButton.UseVisualStyleBackColor = true;
+            this.DeleteProductButton.Click += new System.EventHandler(this.DeleteProductButton_Click);
+            // 
+            // ProductSearchBar
+            // 
+            this.ProductSearchBar.Location = new System.Drawing.Point(388, 265);
+            this.ProductSearchBar.Name = "ProductSearchBar";
+            this.ProductSearchBar.Size = new System.Drawing.Size(282, 20);
+            this.ProductSearchBar.TabIndex = 34;
+            this.ProductSearchBar.Text = "Enter Product\'s Name Here";
+            this.ProductSearchBar.Click += new System.EventHandler(this.EmptyTextBoxOnClick_Click);
+            this.ProductSearchBar.TextChanged += new System.EventHandler(this.ProductSearchBar_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(682, 367);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 13);
+            this.label2.TabIndex = 33;
+            // 
+            // ProductListBox
+            // 
+            this.ProductListBox.FormattingEnabled = true;
+            this.ProductListBox.Location = new System.Drawing.Point(389, 293);
+            this.ProductListBox.Name = "ProductListBox";
+            this.ProductListBox.Size = new System.Drawing.Size(282, 238);
+            this.ProductListBox.TabIndex = 32;
+            this.ProductListBox.DoubleClick += new System.EventHandler(this.ProductListBox_DoubleClick);
+            // 
+            // OrderListBox
+            // 
+            this.OrderListBox.FormattingEnabled = true;
+            this.OrderListBox.Location = new System.Drawing.Point(779, 274);
+            this.OrderListBox.Name = "OrderListBox";
+            this.OrderListBox.Size = new System.Drawing.Size(174, 186);
+            this.OrderListBox.TabIndex = 37;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(835, 255);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(33, 13);
+            this.label3.TabIndex = 38;
+            this.label3.Text = "Order";
+            // 
+            // SubTotalLabel
+            // 
+            this.SubTotalLabel.AutoSize = true;
+            this.SubTotalLabel.Location = new System.Drawing.Point(831, 472);
+            this.SubTotalLabel.Name = "SubTotalLabel";
+            this.SubTotalLabel.Size = new System.Drawing.Size(56, 13);
+            this.SubTotalLabel.TabIndex = 39;
+            this.SubTotalLabel.Text = "Sub-Total:";
+            // 
+            // ITBISLabel
+            // 
+            this.ITBISLabel.AutoSize = true;
+            this.ITBISLabel.Location = new System.Drawing.Point(835, 495);
+            this.ITBISLabel.Name = "ITBISLabel";
+            this.ITBISLabel.Size = new System.Drawing.Size(37, 13);
+            this.ITBISLabel.TabIndex = 40;
+            this.ITBISLabel.Text = "ITBIS:";
+            // 
+            // TotalLabel
+            // 
+            this.TotalLabel.AutoSize = true;
+            this.TotalLabel.Location = new System.Drawing.Point(838, 542);
+            this.TotalLabel.Name = "TotalLabel";
+            this.TotalLabel.Size = new System.Drawing.Size(34, 13);
+            this.TotalLabel.TabIndex = 44;
+            this.TotalLabel.Text = "Total:";
+            // 
+            // SubTotalBox
+            // 
+            this.SubTotalBox.Location = new System.Drawing.Point(893, 469);
+            this.SubTotalBox.Name = "SubTotalBox";
+            this.SubTotalBox.ReadOnly = true;
+            this.SubTotalBox.Size = new System.Drawing.Size(54, 20);
+            this.SubTotalBox.TabIndex = 47;
+            this.SubTotalBox.Text = "$00.00";
+            this.SubTotalBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // TotalBox
+            // 
+            this.TotalBox.Location = new System.Drawing.Point(894, 539);
+            this.TotalBox.Name = "TotalBox";
+            this.TotalBox.ReadOnly = true;
+            this.TotalBox.Size = new System.Drawing.Size(54, 20);
+            this.TotalBox.TabIndex = 48;
+            this.TotalBox.Text = "$00.00";
+            this.TotalBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // ITBISBox
+            // 
+            this.ITBISBox.Location = new System.Drawing.Point(893, 492);
+            this.ITBISBox.Name = "ITBISBox";
+            this.ITBISBox.ReadOnly = true;
+            this.ITBISBox.Size = new System.Drawing.Size(54, 20);
+            this.ITBISBox.TabIndex = 49;
+            this.ITBISBox.Text = "$00.00";
+            this.ITBISBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // CheckoutButton
+            // 
+            this.CheckoutButton.Location = new System.Drawing.Point(955, 283);
+            this.CheckoutButton.Name = "CheckoutButton";
+            this.CheckoutButton.Size = new System.Drawing.Size(75, 23);
+            this.CheckoutButton.TabIndex = 51;
+            this.CheckoutButton.Text = "Checkout";
+            this.CheckoutButton.UseVisualStyleBackColor = true;
+            this.CheckoutButton.Click += new System.EventHandler(this.CheckoutButton_Click);
+            // 
+            // EditCustButton
+            // 
+            this.EditCustButton.Location = new System.Drawing.Point(294, 322);
+            this.EditCustButton.Name = "EditCustButton";
+            this.EditCustButton.Size = new System.Drawing.Size(75, 23);
+            this.EditCustButton.TabIndex = 53;
+            this.EditCustButton.Text = "Edit";
+            this.EditCustButton.UseVisualStyleBackColor = true;
+            this.EditCustButton.Click += new System.EventHandler(this.EditCustButton_Click);
+            // 
+            // EditProductButton
+            // 
+            this.EditProductButton.Location = new System.Drawing.Point(677, 322);
+            this.EditProductButton.Name = "EditProductButton";
+            this.EditProductButton.Size = new System.Drawing.Size(75, 23);
+            this.EditProductButton.TabIndex = 54;
+            this.EditProductButton.Text = "Edit";
+            this.EditProductButton.UseVisualStyleBackColor = true;
+            this.EditProductButton.Click += new System.EventHandler(this.EditProductButton_Click);
+            // 
+            // NewProductButton
+            // 
+            this.NewProductButton.Location = new System.Drawing.Point(677, 349);
+            this.NewProductButton.Name = "NewProductButton";
+            this.NewProductButton.Size = new System.Drawing.Size(75, 23);
+            this.NewProductButton.TabIndex = 55;
+            this.NewProductButton.Text = "New";
+            this.NewProductButton.UseVisualStyleBackColor = true;
+            this.NewProductButton.Click += new System.EventHandler(this.NewProductButton_Click);
             // 
             // pictureBox2
             // 
@@ -190,209 +408,85 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
-            // CustomersSearchBar
+            // RemoveButton
             // 
-            this.CustomersSearchBar.Location = new System.Drawing.Point(5, 265);
-            this.CustomersSearchBar.Name = "CustomersSearchBar";
-            this.CustomersSearchBar.Size = new System.Drawing.Size(282, 20);
-            this.CustomersSearchBar.TabIndex = 27;
-            this.CustomersSearchBar.Text = "Enter Customer\'s Name Here";
-            this.CustomersSearchBar.TextChanged += new System.EventHandler(this.SearchBar_TextChanged);
+            this.RemoveButton.Location = new System.Drawing.Point(955, 312);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(75, 23);
+            this.RemoveButton.TabIndex = 56;
+            this.RemoveButton.Text = "Remove";
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
-            // phoneNumtextBox
+            // TipBox
             // 
-            this.phoneNumtextBox.Location = new System.Drawing.Point(444, 170);
-            this.phoneNumtextBox.Mask = "000-000-0000";
-            this.phoneNumtextBox.Name = "phoneNumtextBox";
-            this.phoneNumtextBox.Size = new System.Drawing.Size(100, 20);
-            this.phoneNumtextBox.TabIndex = 28;
+            this.TipBox.Location = new System.Drawing.Point(893, 515);
+            this.TipBox.Name = "TipBox";
+            this.TipBox.ReadOnly = true;
+            this.TipBox.Size = new System.Drawing.Size(54, 20);
+            this.TipBox.TabIndex = 58;
+            this.TipBox.Text = "$00.00";
+            this.TipBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // DeleteCustButton
+            // TipLabel
             // 
-            this.DeleteCustButton.Location = new System.Drawing.Point(294, 300);
-            this.DeleteCustButton.Name = "DeleteCustButton";
-            this.DeleteCustButton.Size = new System.Drawing.Size(75, 23);
-            this.DeleteCustButton.TabIndex = 29;
-            this.DeleteCustButton.Text = "Delete";
-            this.DeleteCustButton.UseVisualStyleBackColor = true;
-            this.DeleteCustButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            this.TipLabel.AutoSize = true;
+            this.TipLabel.Location = new System.Drawing.Point(843, 518);
+            this.TipLabel.Name = "TipLabel";
+            this.TipLabel.Size = new System.Drawing.Size(25, 13);
+            this.TipLabel.TabIndex = 57;
+            this.TipLabel.Text = "Tip:";
             // 
-            // InvalidEmail
+            // CustTypeComboBox
             // 
-            this.InvalidEmail.AutoSize = true;
-            this.InvalidEmail.ForeColor = System.Drawing.Color.Red;
-            this.InvalidEmail.Location = new System.Drawing.Point(550, 144);
-            this.InvalidEmail.Name = "InvalidEmail";
-            this.InvalidEmail.Size = new System.Drawing.Size(104, 13);
-            this.InvalidEmail.TabIndex = 30;
-            this.InvalidEmail.Text = "*Email Already Exists";
-            this.InvalidEmail.Visible = false;
-            this.InvalidEmail.Click += new System.EventHandler(this.label2_Click);
+            this.CustTypeComboBox.FormattingEnabled = true;
+            this.CustTypeComboBox.Location = new System.Drawing.Point(444, 167);
+            this.CustTypeComboBox.Name = "CustTypeComboBox";
+            this.CustTypeComboBox.Size = new System.Drawing.Size(210, 21);
+            this.CustTypeComboBox.TabIndex = 59;
             // 
-            // ShowOrdersButton
+            // CustomerTypeLabel
             // 
-            this.ShowOrdersButton.Location = new System.Drawing.Point(294, 330);
-            this.ShowOrdersButton.Name = "ShowOrdersButton";
-            this.ShowOrdersButton.Size = new System.Drawing.Size(75, 23);
-            this.ShowOrdersButton.TabIndex = 31;
-            this.ShowOrdersButton.Text = "Orders";
-            this.ShowOrdersButton.UseVisualStyleBackColor = true;
+            this.CustomerTypeLabel.AutoSize = true;
+            this.CustomerTypeLabel.Location = new System.Drawing.Point(299, 170);
+            this.CustomerTypeLabel.Name = "CustomerTypeLabel";
+            this.CustomerTypeLabel.Size = new System.Drawing.Size(81, 13);
+            this.CustomerTypeLabel.TabIndex = 60;
+            this.CustomerTypeLabel.Text = "Customer Type:";
             // 
-            // AddProductButton
+            // RNCTextBox
             // 
-            this.AddProductButton.Location = new System.Drawing.Point(685, 330);
-            this.AddProductButton.Name = "AddProductButton";
-            this.AddProductButton.Size = new System.Drawing.Size(75, 23);
-            this.AddProductButton.TabIndex = 36;
-            this.AddProductButton.Text = "Add";
-            this.AddProductButton.UseVisualStyleBackColor = true;
+            this.RNCTextBox.Location = new System.Drawing.Point(444, 142);
+            this.RNCTextBox.Mask = "000-0000000-0";
+            this.RNCTextBox.Name = "RNCTextBox";
+            this.RNCTextBox.Size = new System.Drawing.Size(100, 20);
+            this.RNCTextBox.TabIndex = 62;
             // 
-            // DeleteProductButton
+            // RNCLabel
             // 
-            this.DeleteProductButton.Location = new System.Drawing.Point(685, 301);
-            this.DeleteProductButton.Name = "DeleteProductButton";
-            this.DeleteProductButton.Size = new System.Drawing.Size(75, 23);
-            this.DeleteProductButton.TabIndex = 35;
-            this.DeleteProductButton.Text = "Delete";
-            this.DeleteProductButton.UseVisualStyleBackColor = true;
-            // 
-            // ProductSearchBar
-            // 
-            this.ProductSearchBar.Location = new System.Drawing.Point(388, 265);
-            this.ProductSearchBar.Name = "ProductSearchBar";
-            this.ProductSearchBar.Size = new System.Drawing.Size(282, 20);
-            this.ProductSearchBar.TabIndex = 34;
-            this.ProductSearchBar.Text = "Enter Product\'s Name Here";
-            this.ProductSearchBar.TextChanged += new System.EventHandler(this.ProductSearchBar_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(682, 367);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 13);
-            this.label2.TabIndex = 33;
-            // 
-            // ProductListBox
-            // 
-            this.ProductListBox.FormattingEnabled = true;
-            this.ProductListBox.Location = new System.Drawing.Point(389, 293);
-            this.ProductListBox.Name = "ProductListBox";
-            this.ProductListBox.Size = new System.Drawing.Size(282, 238);
-            this.ProductListBox.TabIndex = 32;
-            // 
-            // OrderListBox
-            // 
-            this.OrderListBox.FormattingEnabled = true;
-            this.OrderListBox.Location = new System.Drawing.Point(779, 293);
-            this.OrderListBox.Name = "OrderListBox";
-            this.OrderListBox.Size = new System.Drawing.Size(174, 186);
-            this.OrderListBox.TabIndex = 37;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(835, 265);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 13);
-            this.label3.TabIndex = 38;
-            this.label3.Text = "Order";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // SubTotalLabel
-            // 
-            this.SubTotalLabel.AutoSize = true;
-            this.SubTotalLabel.Location = new System.Drawing.Point(831, 491);
-            this.SubTotalLabel.Name = "SubTotalLabel";
-            this.SubTotalLabel.Size = new System.Drawing.Size(56, 13);
-            this.SubTotalLabel.TabIndex = 39;
-            this.SubTotalLabel.Text = "Sub-Total:";
-            // 
-            // ITBISLabel
-            // 
-            this.ITBISLabel.AutoSize = true;
-            this.ITBISLabel.Location = new System.Drawing.Point(835, 514);
-            this.ITBISLabel.Name = "ITBISLabel";
-            this.ITBISLabel.Size = new System.Drawing.Size(37, 13);
-            this.ITBISLabel.TabIndex = 40;
-            this.ITBISLabel.Text = "ITBIS:";
-            // 
-            // TotalLabel
-            // 
-            this.TotalLabel.AutoSize = true;
-            this.TotalLabel.Location = new System.Drawing.Point(837, 538);
-            this.TotalLabel.Name = "TotalLabel";
-            this.TotalLabel.Size = new System.Drawing.Size(34, 13);
-            this.TotalLabel.TabIndex = 44;
-            this.TotalLabel.Text = "Total:";
-            this.TotalLabel.Click += new System.EventHandler(this.label9_Click);
-            // 
-            // SubTotalBox
-            // 
-            this.SubTotalBox.Location = new System.Drawing.Point(893, 488);
-            this.SubTotalBox.Name = "SubTotalBox";
-            this.SubTotalBox.ReadOnly = true;
-            this.SubTotalBox.Size = new System.Drawing.Size(54, 20);
-            this.SubTotalBox.TabIndex = 47;
-            this.SubTotalBox.Text = "$00.00";
-            this.SubTotalBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // TotalBox
-            // 
-            this.TotalBox.Location = new System.Drawing.Point(893, 535);
-            this.TotalBox.Name = "TotalBox";
-            this.TotalBox.ReadOnly = true;
-            this.TotalBox.Size = new System.Drawing.Size(54, 20);
-            this.TotalBox.TabIndex = 48;
-            this.TotalBox.Text = "$00.00";
-            this.TotalBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // ITBISBox
-            // 
-            this.ITBISBox.Location = new System.Drawing.Point(893, 511);
-            this.ITBISBox.Name = "ITBISBox";
-            this.ITBISBox.ReadOnly = true;
-            this.ITBISBox.Size = new System.Drawing.Size(54, 20);
-            this.ITBISBox.TabIndex = 49;
-            this.ITBISBox.Text = "$00.00";
-            this.ITBISBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(0, 0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 50;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // CheckoutButton
-            // 
-            this.CheckoutButton.Location = new System.Drawing.Point(959, 301);
-            this.CheckoutButton.Name = "CheckoutButton";
-            this.CheckoutButton.Size = new System.Drawing.Size(75, 23);
-            this.CheckoutButton.TabIndex = 51;
-            this.CheckoutButton.Text = "Checkout";
-            this.CheckoutButton.UseVisualStyleBackColor = true;
-            // 
-            // NewProductButton
-            // 
-            this.NewProductButton.Location = new System.Drawing.Point(677, 359);
-            this.NewProductButton.Name = "NewProductButton";
-            this.NewProductButton.Size = new System.Drawing.Size(96, 23);
-            this.NewProductButton.TabIndex = 52;
-            this.NewProductButton.Text = "New Product";
-            this.NewProductButton.UseVisualStyleBackColor = true;
-            this.NewProductButton.Click += new System.EventHandler(this.button5_Click);
+            this.RNCLabel.AutoSize = true;
+            this.RNCLabel.Location = new System.Drawing.Point(296, 145);
+            this.RNCLabel.Name = "RNCLabel";
+            this.RNCLabel.Size = new System.Drawing.Size(33, 13);
+            this.RNCLabel.TabIndex = 61;
+            this.RNCLabel.Text = "RNC:";
             // 
             // YodaCoffeeShop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1042, 579);
+            this.ClientSize = new System.Drawing.Size(1042, 564);
+            this.Controls.Add(this.RNCTextBox);
+            this.Controls.Add(this.RNCLabel);
+            this.Controls.Add(this.CustomerTypeLabel);
+            this.Controls.Add(this.CustTypeComboBox);
+            this.Controls.Add(this.TipBox);
+            this.Controls.Add(this.TipLabel);
+            this.Controls.Add(this.RemoveButton);
             this.Controls.Add(this.NewProductButton);
+            this.Controls.Add(this.EditProductButton);
+            this.Controls.Add(this.EditCustButton);
             this.Controls.Add(this.CheckoutButton);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.ITBISBox);
             this.Controls.Add(this.TotalBox);
             this.Controls.Add(this.SubTotalBox);
@@ -401,7 +495,7 @@
             this.Controls.Add(this.SubTotalLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.OrderListBox);
-            this.Controls.Add(this.AddProductButton);
+            this.Controls.Add(this.AddToOrderButton);
             this.Controls.Add(this.DeleteProductButton);
             this.Controls.Add(this.ProductSearchBar);
             this.Controls.Add(this.label2);
@@ -409,7 +503,7 @@
             this.Controls.Add(this.ShowOrdersButton);
             this.Controls.Add(this.InvalidEmail);
             this.Controls.Add(this.DeleteCustButton);
-            this.Controls.Add(this.phoneNumtextBox);
+            this.Controls.Add(this.PhNumTextBox);
             this.Controls.Add(this.CustomersSearchBar);
             this.Controls.Add(this.lblCustomerHeader);
             this.Controls.Add(this.emailTxtBox);
@@ -425,6 +519,7 @@
             this.Controls.Add(this.enterFNameLabel);
             this.Controls.Add(this.welcomeLabel);
             this.Name = "YodaCoffeeShop";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MyCoffeeProject";
             this.Load += new System.EventHandler(this.YodaCoffeeShop_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -452,11 +547,11 @@
         private System.Windows.Forms.Label lblCustomerHeader;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.TextBox CustomersSearchBar;
-        private System.Windows.Forms.MaskedTextBox phoneNumtextBox;
+        private System.Windows.Forms.MaskedTextBox PhNumTextBox;
         private System.Windows.Forms.Button DeleteCustButton;
         private System.Windows.Forms.Label InvalidEmail;
         private System.Windows.Forms.Button ShowOrdersButton;
-        private System.Windows.Forms.Button AddProductButton;
+        private System.Windows.Forms.Button AddToOrderButton;
         private System.Windows.Forms.Button DeleteProductButton;
         private System.Windows.Forms.TextBox ProductSearchBar;
         private System.Windows.Forms.Label label2;
@@ -469,9 +564,17 @@
         private System.Windows.Forms.TextBox SubTotalBox;
         private System.Windows.Forms.TextBox TotalBox;
         private System.Windows.Forms.TextBox ITBISBox;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button CheckoutButton;
-        private System.Windows.Forms.Button NewProductButton;
+        private Button EditCustButton;
+        private Button EditProductButton;
+        private Button NewProductButton;
+        private Button RemoveButton;
+        private TextBox TipBox;
+        private Label TipLabel;
+        private ComboBox CustTypeComboBox;
+        private Label CustomerTypeLabel;
+        private MaskedTextBox RNCTextBox;
+        private Label RNCLabel;
     }
 }
 

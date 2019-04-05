@@ -4,8 +4,8 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MyCoffeeProject.Classes;
-using YodaCoffeeShopData;
+using MyCoffeeProject;
+using YodaCoffeeShopData.Repositories.Entities;
 
 namespace MyCoffeeProject
 {
@@ -15,7 +15,7 @@ namespace MyCoffeeProject
         /// Global Variables.
         /// </summary>
         public static bool LoginSuccess = false;
-        public static User LoggedUser { get; set; }
+        public static UserRepository LoggedUser { get; set; }
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

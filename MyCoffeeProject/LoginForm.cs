@@ -2,11 +2,14 @@
 using System.Linq;
 using System.Windows.Forms;
 using YodaCoffeeShopData;
+using YodaCoffeeShopData.Repositories.Entities;
 
 namespace MyCoffeeProject
 {
     public partial class LoginForm : Form
     {
+        public YodaCoffeeShopContext Context = new YodaCoffeeShopContext();
+
         public LoginForm()
         {
             InitializeComponent();
@@ -53,30 +56,15 @@ namespace MyCoffeeProject
         {
             string userName = UserBox.Text;
             string password = PasswordBox.Text;
-
-            using (var context = new YodaCoffeeShopContext())
+            var user = new UserRepository(Context);
+            if (!user.Login(userName, password))
             {
-                var user = context.Users.FirstOrDefault(u => u.UserName == userName);
-                if (user == null)
-                {
-                    wrongCredentials.Visible = true;
-                }
-                else
-                {
-                    if (PasswordHasher.ValidatePassword(password, user.Password))
-                    {
-                        Program.LoggedUser = user;
-                        Program.LoginSuccess = true;
-                        Close();
-                    }
-                    else
-                    {
-                        wrongCredentials.Visible = true;
-                    }
-                }
+                wrongCredentials.Visible = true;
+                return;
             }
-
-            
+            Program.LoggedUser = user;
+            Program.LoginSuccess = true;
+            Close();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
